@@ -11,13 +11,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
 } from '@remix-run/react'
-import reportWebVitals from './reportWebVitals.client'
-import { sendToVercelAnalytics } from './vitals.client'
-import { useHydrated } from 'remix-utils'
-import { MetronomeLinks } from '@metronome-sh/react'
-import { Analytics } from '@vercel/analytics/react'
 
 export function links() {
   return [
@@ -83,37 +77,17 @@ export const loader = async () => {
 }
 
 export default function App() {
-  const { ENV } = useLoaderData()
-
-  if (useHydrated())
-    reportWebVitals(sendToVercelAnalytics, {
-      analyticsId: ENV.VERCEL_ANALYTICS_ID,
-    })
-
   return (
     <html lang="en">
       <head>
         <Meta />
         <Links />
-        <MetronomeLinks />
-        <Analytics />
       </head>
       <body>
         <SidebarLayout>
           <Outlet />
         </SidebarLayout>
         <ScrollRestoration />
-
-        {process.env.NODE_ENV === 'production' ? (
-          <>
-            {/* <script src="/_vercel/insights/script.js" defer></script> */}
-            <script
-              src="https://delightful-cat.bufgreencode.com/script.js"
-              data-site="HWWXLVYL"
-              defer
-            />
-          </>
-        ) : null}
         <Scripts />
         <LiveReload />
       </body>

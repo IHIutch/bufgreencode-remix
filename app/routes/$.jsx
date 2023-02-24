@@ -1,12 +1,6 @@
 import { Link } from '@remix-run/react'
-import { useHydrated } from 'remix-utils'
 
 export default function FourOhFour() {
-  const isHydrated = useHydrated()
-  if (process.env.NODE_ENV === 'production' && isHydrated) {
-    window?.fathom?.trackGoal('8HR9GZLM', 0) // 404
-  }
-
   return (
     <div className="flex">
       <div className="my-12 w-full px-4 md:px-8 xl:w-3/4">
