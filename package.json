@@ -27,7 +27,7 @@
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
-    "lucide-react": "^0.104.1",
+    "lucide-react": "^0.115.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remix": "^1.8.2",
