@@ -1,12 +1,13 @@
-import groupBy from 'lodash/groupBy'
 import * as Accordion from '@radix-ui/react-accordion'
 import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import clsx from 'clsx'
 import { NavLink, useLoaderData, useParams } from '@remix-run/react'
+import groupBy from 'lodash/groupBy'
+import type { loader } from '@/root'
 
 export default function ArticlesAccordion() {
-  const { articles } = useLoaderData()
+  const { articles } = useLoaderData<typeof loader>()
   const params = useParams()
 
   const groupedArticles = groupBy(
@@ -43,8 +44,8 @@ export default function ArticlesAccordion() {
                 <div className="flex w-full items-center text-gray-600 hover:text-gray-900">
                   <div className="grow px-2 py-1">
                     <span className="font-medium">
-                      {groupedArticles[articleNum][0].articleNumber}.{' '}
-                      {groupedArticles[articleNum][0].articleTitle}
+                      {groupedArticles[articleNum][0].article_number}.{' '}
+                      {groupedArticles[articleNum][0].article}
                     </span>
                   </div>
                   <div>
@@ -102,8 +103,8 @@ export default function ArticlesAccordion() {
                                 isActive ? 'text-green-700' : ''
                               )}
                             >
-                              {section.articleNumber}.{section.sectionNumber}{' '}
-                              {section.sectionTitle}
+                              {section.article_number}.{section.section_number}{' '}
+                              {section.title}
                             </span>
                           </div>
                         )}
