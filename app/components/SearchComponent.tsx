@@ -1,12 +1,18 @@
+import type { ReactNode } from 'react'
 import { useState } from 'react'
 import { DocSearchModal } from '@docsearch/react'
 import { Loader, Search } from 'lucide-react'
 import { useHydrated } from 'remix-utils'
 import clsx from 'clsx'
 import { Link, useLoaderData } from '@remix-run/react'
+import type { loader } from '@/root'
+import type {
+  InternalDocSearchHit,
+  StoredDocSearchHit,
+} from '@docsearch/react/dist/esm/types'
 
 export default function SearchComponent() {
-  const { ENV } = useLoaderData()
+  const { ENV } = useLoaderData<typeof loader>()
   const [isOpen, setIsOpen] = useState(false)
   let isHydrated = useHydrated()
 
@@ -24,7 +30,7 @@ export default function SearchComponent() {
           {isHydrated ? (
             <Search className="h-4 w-4" />
           ) : (
-            <Loader className="h-4 w-4 animate-spin" />
+            <Loader className="animate-spin h-4 w-4" />
           )}
           <span className="ml-2">Search the docs...</span>
         </div>
@@ -32,9 +38,9 @@ export default function SearchComponent() {
       {isOpen && isHydrated ? (
         <DocSearchModal
           initialScrollY={window.scrollY}
-          appId={ENV.ALGOLIA_APP_ID}
-          indexName={ENV.ALGOLIA_INDEX_NAME}
-          apiKey={ENV.ALGOLIA_API_KEY}
+          appId={ENV.PUBLIC_ALGOLIA_APP_ID || ''}
+          indexName={ENV.PUBLIC_ALGOLIA_INDEX_NAME || ''}
+          apiKey={ENV.PUBLIC_ALGOLIA_API_KEY || ''}
           onClose={() => setIsOpen(false)}
           placeholder="Search the docs..."
           hitComponent={Hit}
@@ -78,18 +84,23 @@ export default function SearchComponent() {
   )
 }
 
-const Hit = ({ hit, children }) => {
+const Hit = ({
+  hit,
+  children,
+}: {
+  hit: InternalDocSearchHit | StoredDocSearchHit
+  children: ReactNode
+}) => {
   return (
     <Link
-      prefetch="intent"
       to={hit.url}
-      className={clsx({
-        'DocSearch-Hit--Result': hit.__is_result?.(),
-        // 'DocSearch-Hit--Parent': hit.__is_parent?.(),
-        // 'DocSearch-Hit--Child': hit.__is_child?.(),
-        'DocSearch-Hit--FirstChild': hit.__is_first?.(),
-        'DocSearch-Hit--LastChild': hit.__is_last?.(),
-      })}
+      // className={clsx({
+      //   'DocSearch-Hit--Result': hit?.__is_result?.(),
+      //   // 'DocSearch-Hit--Parent': hit.__is_parent?.(),
+      //   // 'DocSearch-Hit--Child': hit.__is_child?.(),
+      //   'DocSearch-Hit--FirstChild': hit.__is_first?.(),
+      //   'DocSearch-Hit--LastChild': hit.__is_last?.(),
+      // })}
     >
       {children}
     </Link>
