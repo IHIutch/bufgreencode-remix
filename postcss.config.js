@@ -1,22 +1,12 @@
-const handlePurge = (ctx) => {
-  return ctx.file.basename !== 'main.scss'
-    ? {
-        '@fullhuman/postcss-purgecss': {
-          content: ['./app/**/*.{js,ts,jsx,tsx}'],
-          defaultExtractor: (content) =>
-            content.match(/[\w-/:[\]]+(?<!:)/g) || [],
-        },
-      }
-    : {}
-}
-
-module.exports = (ctx) => ({
-  map: ctx.options.map,
-  parser: 'postcss-scss',
+module.exports = {
   plugins: {
-    ...handlePurge(ctx),
+    '@fullhuman/postcss-purgecss': {
+      content: [
+        './app/**/*.{js,ts,jsx,tsx}',
+      ],
+      defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
+    },
     '@csstools/postcss-sass': {},
-    'postcss-import': {},
     'tailwindcss/nesting': {},
     tailwindcss: {},
     autoprefixer: {},
@@ -24,4 +14,4 @@ module.exports = (ctx) => ({
       preset: 'default',
     },
   },
-})
+}

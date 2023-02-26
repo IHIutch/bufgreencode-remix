@@ -1,5 +1,4 @@
 import mainStyle from '@/styles/main.css'
-import hamburgerStyle from '@/styles/hamburgers.css'
 import type { LoaderArgs, MetaFunction } from '@remix-run/node'
 import { json } from '@remix-run/node'
 import {
@@ -18,10 +17,8 @@ export const links = () => {
   return [
     // Preload
     { rel: 'preload', href: mainStyle, as: 'style' },
-    { rel: 'preload', href: hamburgerStyle, as: 'style' },
     // Styles
     { rel: 'stylesheet', href: mainStyle },
-    { rel: 'stylesheet', href: hamburgerStyle },
     // Preconnect scripts
     {
       rel: 'preconnect',
@@ -51,10 +48,9 @@ export async function loader(args: LoaderArgs) {
 
   // This is necessary for exposing client side env vars with Remix. Read: https://remix.run/docs/en/v1/guides/envvars
   const ENV = {
-    ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID,
-    ALGOLIA_INDEX_NAME: process.env.ALGOLIA_INDEX_NAME,
-    ALGOLIA_API_KEY: process.env.ALGOLIA_API_KEY,
-    VERCEL_ANALYTICS_ID: process.env.VERCEL_ANALYTICS_ID,
+    PUBLIC_ALGOLIA_API_KEY: process.env.PUBLIC_ALGOLIA_API_KEY,
+    PUBLIC_ALGOLIA_APP_ID: process.env.PUBLIC_ALGOLIA_APP_ID,
+    PUBLIC_ALGOLIA_INDEX_NAME: process.env.PUBLIC_ALGOLIA_INDEX_NAME,
   }
 
   return json({ articles, ENV })
