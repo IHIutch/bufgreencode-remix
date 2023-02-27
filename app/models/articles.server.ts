@@ -22,16 +22,13 @@ export async function getArticles() {
 
   const articles = await Promise.all(
     articlePaths.map(async (ap) => {
-      const source = fs.readFileSync(ap.path, 'utf8')
-
-      const { data: frontmatter } = matter(source)
-
+      const { data: frontmatter } = matter.read(ap.path)
       return {
         title: frontmatter.title,
         article: frontmatter.article,
         article_number: frontmatter.article_number,
         section_number: frontmatter.section_number,
-        lead: frontmatter.section_number || '',
+        lead: frontmatter.lead || '',
         slug: ap.slug,
       }
     })
@@ -46,12 +43,24 @@ export async function getArticle(slug: string) {
     const source = fs.readFileSync(`${contentDir}${slug}.mdx`, 'utf8')
 
     const ast = Markdoc.parse(source)
-    const { data: frontmatter } = matter(source)
+
+    const { data: frontmatter } = matter(
+      ast.attributes?.frontmatter
+        ? `---\n${ast.attributes?.frontmatter}\n---\n`
+        : ''
+    )
 
     const content = Markdoc.transform(ast, markdocConfig)
     const headings = getHeadings(content)
 
-    return { content, frontmatter, headings }
+    return {
+      content,
+      frontmatter: {
+        title: frontmatter.title,
+        lead: frontmatter.lead || '',
+      },
+      headings,
+    }
   } catch (error) {
     throw new Response('Something went wrong', {
       status: 500,
