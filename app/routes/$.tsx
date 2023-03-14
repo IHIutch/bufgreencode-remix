@@ -7,7 +7,7 @@ export default function FourOhFour() {
         <div className="max-w-prose xl:mx-auto">
           <h1 className="mb-2 text-5xl font-medium leading-tight">404</h1>
           <p className="mb-8 text-lg text-gray-700">
-            Looks like you found a page that doesn't exist.
+            Looks like you found a page that doesn&apos;t exist.
           </p>
           <div className="prose">
             <Link prefetch="intent" to="/">

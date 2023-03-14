@@ -6,7 +6,8 @@
     "build:postcss": "postcss styles/*.scss -m -d app/styles --ext css",
     "dev": "concurrently \"pnpm dev:postcss\"  \"remix dev\"",
     "dev:postcss": "postcss styles/*.scss -m -w -d app/styles --ext css",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "lint": "eslint --ext .ts,.tsx --ignore-path .gitignore ."
   },
   "dependencies": {
     "@docsearch/css": "^3.3.3",
@@ -37,12 +38,14 @@
     "@types/lodash": "^4.14.191",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
     "autoprefixer": "^10.4.14",
     "concurrently": "^7.6.0",
     "cssnano": "^5.1.15",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-tailwindcss": "^3.10.1",
     "hamburgers": "^1.2.1",
     "postcss-cli": "^10.1.0",
     "prettier": "^2.8.4",

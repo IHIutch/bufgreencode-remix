@@ -16,7 +16,7 @@ export default function PageToc({
     const setCurrent: IntersectionObserverCallback = (entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
-          const { id } = entry.target
+          // const { id } = entry.target
           // if (id === onThisPageID) continue
           setCurrentHeading({
             slug: entry.target.id,
@@ -50,7 +50,7 @@ export default function PageToc({
 
   const onLinkClick = (e: MouseEvent) => {
     setCurrentHeading({
-      slug: e.currentTarget.getAttribute('href')!.replace('#', ''),
+      slug: (e.currentTarget.getAttribute('href') || '').replace('#', ''),
       text: e.currentTarget.textContent || '',
     })
   }

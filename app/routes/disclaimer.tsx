@@ -22,12 +22,12 @@ export default function Disclaimer() {
               target="_blank"
               rel="noreferrer"
             >
-              City of Buffalo's website.
+              City of Buffalo&apos;s website.
             </a>
           </p>
           <p>
-            We've done our best to make this site as accurate as possible in
-            order to make it easier to search and find important information.
+            We&apos;ve done our best to make this site as accurate as possible
+            in order to make it easier to search and find important information.
             Any inaccurate or or out of date information is completely
             unintentional.
           </p>

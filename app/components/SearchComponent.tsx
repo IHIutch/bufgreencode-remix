@@ -14,7 +14,7 @@ import type {
 export default function SearchComponent() {
   const { ENV } = useLoaderData<typeof loader>()
   const [isOpen, setIsOpen] = useState(false)
-  let isHydrated = useHydrated()
+  const isHydrated = useHydrated()
 
   return (
     <div className="h-full w-full">
