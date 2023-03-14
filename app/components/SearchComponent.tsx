@@ -30,7 +30,7 @@ export default function SearchComponent() {
           {isHydrated ? (
             <Search className="h-4 w-4" />
           ) : (
-            <Loader className="animate-spin h-4 w-4" />
+            <Loader className="h-4 w-4 animate-spin" />
           )}
           <span className="ml-2">Search the docs...</span>
         </div>
