@@ -41,7 +41,7 @@
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "autoprefixer": "^10.4.14",
     "concurrently": "^7.6.0",
-    "cssnano": "^5.1.15",
+    "cssnano": "^6.0.1",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-prettier": "^4.2.1",
